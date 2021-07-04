@@ -22,7 +22,7 @@
         <input type="password" v-model="password" />
       </div>
       <div>
-        <label>Password confirmation:</label>
+        <label>Password Confirmation:</label>
         <input type="password" v-model="passwordConfirmation" />
       </div>
       <input type="submit" value="Submit" />
@@ -38,6 +38,7 @@ export default {
     return {
       first_name: "",
       last_name: "",
+      username: "",
       department: "",
       password: "",
       passwordConfirmation: "",

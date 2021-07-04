@@ -32,7 +32,7 @@ export default {
   methods: {
     submit: function () {
       var params = {
-        email: this.email,
+        username: this.username,
         password: this.password,
       };
       axios
@@ -44,8 +44,8 @@ export default {
         })
         .catch((error) => {
           console.log(error.response);
-          this.errors = ["Invalid email or password."];
-          this.email = "";
+          this.errors = ["Invalid username or password."];
+          this.username = "";
           this.password = "";
         });
     },

@@ -2,14 +2,10 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link>
-      |
       <router-link to="/about">About</router-link>
-      |
-      <router-link to="/signup">Signup</router-link>
-      |
-      <router-link to="/login">Login</router-link>
-
-      <router-link v-if="logged_in" to="/logout">| Logout</router-link>
+      <a v-if="!isLoggedIn()" href="/signup">Sign Up</a>
+      <a v-if="!isLoggedIn()" href="/login">Log In</a>
+      <a v-if="isLoggedIn()" href="/logout">Log Out</a>
     </div>
     <router-view />
   </div>
@@ -38,4 +34,12 @@
 }
 </style>
 
-<script></script>
+<script>
+export default {
+  methods: {
+    isLoggedIn: function () {
+      return localStorage.getItem("jwt");
+    },
+  },
+};
+</script>
