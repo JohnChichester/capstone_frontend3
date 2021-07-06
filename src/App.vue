@@ -1,18 +1,50 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      |
-      <router-link to="/about">About</router-link>
-      |
-      <a v-if="isLoggedIn()" href="/CreateReport">Create Report</a>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="/" class="nav-link">
+              <i class="nav-icon fas fa-house-user"></i>
+              <p>Home</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/about" class="nav-link">
+              <i class="nav-icon fas fa-chalkboard"></i>
+              <p>About</p>
+            </a>
+          </li>
 
-      <a v-if="!isLoggedIn()" href="/signup">Sign Up</a>
-      <a v-if="!isLoggedIn()">|</a>
-      <a v-if="!isLoggedIn()" href="/login">Log In</a>
-      <a v-if="isLoggedIn()">|</a>
-      <a v-if="isLoggedIn()" href="/logout">Log Out</a>
-    </div>
+          <li v-if="isLoggedIn()" class="nav-item">
+            <a href="/CreateReport" class="nav-link">
+              <i class="nav-icon fas fa-clipboard-list"></i>
+              <p>Create Report</p>
+            </a>
+          </li>
+          <li v-if="!isLoggedIn()" class="nav-item">
+            <a href="/signup" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>Signup</p>
+            </a>
+          </li>
+
+          <li v-if="!isLoggedIn()" class="nav-item">
+            <a href="/login" class="nav-link">
+              <i class="nav-icon fas fa-lock-open"></i>
+              <p>Login</p>
+            </a>
+          </li>
+
+          <li v-if="isLoggedIn()" class="nav-item">
+            <a href="/logout" class="nav-link">
+              <i class="nav-icon fas fa-door-open"></i>
+              <p>Logout</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
     <router-view />
   </div>
 </template>
