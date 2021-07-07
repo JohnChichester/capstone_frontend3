@@ -1,5 +1,5 @@
 <template>
-  <div class="content-wrapper">
+  <div class="csidebar-mini sidebar-closed sidebar-collapse" style="height: auto">
     <div class="content-header">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
         Create New Report

@@ -1,5 +1,5 @@
 <template>
-  <div class="content-wrapper">
+  <div class="Signup">
     <form v-on:submit.prevent="submit()">
       <h1>Signup</h1>
       <ul>
