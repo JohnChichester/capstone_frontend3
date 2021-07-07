@@ -44,8 +44,7 @@
                 <tr v-for="report in reports" v-bind:key="report.id">
                   <td>{{ report.good_day_bad_day }}</td>
                   <td>
-                    <a href="report/:id">{{ report.Date }}</a>
-                    /td>
+                    <a href="report/id/">{{ report.Date }}</a>
                   </td>
                   <td>
                     <span class="badge badge-success">{{ report.worked }}</span>
