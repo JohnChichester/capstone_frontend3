@@ -1,8 +1,10 @@
 <template>
-  <div class="Report">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
-      Create New Report
-    </button>
+  <div class="content-wrapper">
+    <div class="content-header">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
+        Create New Report
+      </button>
+    </div>
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -13,11 +15,12 @@
         </div>
         <div class="modal-body">
           <a class="btn btn-app bg-success">
+            <i class="fa-regular fa-face-smile-beam"></i>
             <p>Good</p>
           </a>
           <a class="btn btn-app bg-warning">Fine</a>
           <a class="btn btn-app bg-danger">
-            <i class="fa-solid fa-face-frown"></i>
+            <i class="fa-regular fa-face-frown"></i>
             Bad
           </a>
         </div>
@@ -82,6 +85,7 @@
     </form>
   </div>
 </template>
+
 <script>
 import axios from "axios";
 

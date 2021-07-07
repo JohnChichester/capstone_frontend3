@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div class="card card-secondary">
+      <div class="card-header" />
+    </div>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
