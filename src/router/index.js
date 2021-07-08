@@ -5,6 +5,7 @@ import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import Report from "../views/CreateReport.vue";
+import ShowReport from "../views/ShowReport.vue";
 
 Vue.use(VueRouter);
 
@@ -18,6 +19,7 @@ const routes = [
   { path: "/login", name: "login", component: Login },
   { path: "/logout", name: "logout", component: Logout },
   { path: "/CreateReport", name: "report", component: Report },
+  { path: "/reports/:id", name: "showreport", component: ShowReport },
   {
     path: "/about",
     name: "About",

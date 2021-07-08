@@ -44,7 +44,7 @@
                 <tr v-for="report in reports" v-bind:key="report.id">
                   <td>{{ report.good_day_bad_day }}</td>
                   <td>
-                    <a href="report/id/">{{ report.Date }}</a>
+                    <router-link v-bind:to="`/reports/${report.id}`">{{ report.Date }}</router-link>
                   </td>
                   <td>
                     <span class="badge badge-success">{{ report.worked }}</span>
@@ -83,12 +83,28 @@ export default {
   created: function () {
     this.indexReports();
   },
+
   methods: {
     indexReports: function () {
       axios.get("/reports").then((response) => {
         this.reports = response.data;
         console.log(this.reports);
       });
+    },
+    showReport: function () {
+      var params = {
+        report_id: this.report_id.id,
+      };
+      axios
+        .get("/reports", params)
+        .then((response) => {
+          console.log("get it", response);
+          this.$router.push("/ShowReport");
+        })
+        .catch((error) => {
+          console.log("sget it error", error.response);
+          this.errors = error.response.data.errors;
+        });
     },
   },
 };
