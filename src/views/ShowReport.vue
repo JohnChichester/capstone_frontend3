@@ -1,15 +1,6 @@
 <template>
   <div class="ShowReport">
     <!--{{ report }}-->
-    <p>Any misc tracking was due to...</p>
-    <div>{{ report.misc }}</div>
-    <p>Hours Worked</p>
-    <div>{{ report.worked }}</div>
-    <p>Square ft. Printed</p>
-    <div>{{ report.printed }}</div>
-    <p>Square ft. Cut</p>
-    <div>{{ report.cut }}</div>
-
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">EOD Report: {{ report.Date }}</h3>
@@ -57,7 +48,7 @@
           <div class="card card-secondary">
             <div class="card-header">
               <h4 class="card-title w-100">
-                <a class="d-block w-100" data-toggle="collapse" href="#collapseThree">Sort</a>
+                <a class="d-block w-100" data-toggle="collapse" href="#collapseFour">Sort</a>
               </h4>
             </div>
             <div id="collapseFour" class="collapse" data-parent="#accordion">
@@ -69,7 +60,7 @@
           <div class="card card-secondary">
             <div class="card-header">
               <h4 class="card-title w-100">
-                <a class="d-block w-100" data-toggle="collapse" href="#collapseThree">Set In Order</a>
+                <a class="d-block w-100" data-toggle="collapse" href="#collapseFive">Set In Order</a>
               </h4>
             </div>
             <div id="collapseFive" class="collapse" data-parent="#accordion">
@@ -81,7 +72,7 @@
           <div class="card card-secondary">
             <div class="card-header">
               <h4 class="card-title w-100">
-                <a class="d-block w-100" data-toggle="collapse" href="#collapseThree">Standardize</a>
+                <a class="d-block w-100" data-toggle="collapse" href="#collapseSix">Standardize</a>
               </h4>
             </div>
             <div id="collapseSix" class="collapse" data-parent="#accordion">
@@ -93,12 +84,51 @@
           <div class="card card-secondary">
             <div class="card-header">
               <h4 class="card-title w-100">
-                <a class="d-block w-100" data-toggle="collapse" href="#collapseThree">Misc</a>
+                <a class="d-block w-100" data-toggle="collapse" href="#collapseSeven">Misc</a>
               </h4>
             </div>
             <div id="collapseSeven" class="collapse" data-parent="#accordion">
               <div class="card-body">
+                <h5>Any misc tracking was due to...</h5>
                 {{ report.misc }}
+                <div class="row">
+                  <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info"><i class="far fa-clock"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-number">Hours</span>
+                        <span class="info-box-number">{{ report.worked }}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info"><i class="fa-solid fa-print"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-number">Square ft. Printed</span>
+                        <span class="info-box-number">{{ report.printed }}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info"><i class="fa-solid fa-hand-scissors"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-number">Square ft. Cut</span>
+                        <span class="info-box-number">{{ report.cut }}</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -111,12 +141,6 @@
 </template>
 
 <script>
-//../../plugins/jquery/jquery.min.js">
-//<!-- Bootstrap 4 -->
-//"../../plugins/bootstrap/js/bootstrap.bundle.min.js">
-//<!-- AdminLTE App -->
-//"../../dist/js/adminlte.min.js">
-
 import axios from "axios";
 
 export default {

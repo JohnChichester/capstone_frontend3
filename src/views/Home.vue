@@ -52,11 +52,6 @@
       </div>
       <!-- /.card -->
     </div>
-    <!--<div v-for="report in reports" v-bind:key="report.id">
-      <p>{{ report.good_day_bad_day }}</p>
-      <p>{{ report.Date }}</p>
-      <p>{{ report.worked }}</p>
-    </div>-->
   </div>
 </template>
 
@@ -89,7 +84,7 @@ export default {
       var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
 
       var areaChartData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["February", "March", "April", "May", "June", "July"],
         datasets: [
           {
             label: "Digital Goods",
