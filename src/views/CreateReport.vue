@@ -32,56 +32,58 @@
       <!-- /.modal-content -->
     </div>
     <form v-on:submit.prevent="submit()">
-      <h1>Create Report</h1>
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-      </ul>
-      <div>
-        <label>How was your day?</label>
-        <input type="integer" v-model="good_day_bad_day" />
-      </div>
-      <div>
-        <label>Safety</label>
-        <input type="text" v-model="safety" />
-      </div>
-      <div>
-        <label>Sustain</label>
-        <input type="text" v-model="sustain" />
-      </div>
-      <div>
-        <label>Shine</label>
-        <input type="text" v-model="shine" />
-      </div>
+      <div class="card card-default">
+        <h1></h1>
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+        </ul>
+        <div>
+          <label>How was your day?</label>
+          <input type="integer" v-model="good_day_bad_day" />
+        </div>
+        <div>
+          <label>Safety</label>
+          <input type="text" v-model="safety" />
+        </div>
+        <div>
+          <label>Sustain</label>
+          <input type="text" v-model="sustain" />
+        </div>
+        <div>
+          <label>Shine</label>
+          <input type="text" v-model="shine" />
+        </div>
 
-      <div>
-        <label>Sort</label>
-        <input type="text" v-model="sort" />
+        <div>
+          <label>Sort</label>
+          <input type="text" v-model="sort" />
+        </div>
+        <div>
+          <label>Set in order</label>
+          <input type="text" v-model="set_in_order" />
+        </div>
+        <div>
+          <label>Standardize</label>
+          <input type="text" v-model="standardize" />
+        </div>
+        <div>
+          <label>Misc</label>
+          <input type="text" v-model="misc" />
+        </div>
+        <div>
+          <label>Hours Worked</label>
+          <input type="integer" v-model="worked" />
+        </div>
+        <div>
+          <label>Square foot printed</label>
+          <input type="integer" v-model="printed" />
+        </div>
+        <div>
+          <label>Square foot cut</label>
+          <input type="integer" v-model="cut" />
+        </div>
+        <input type="submit" value="Submit" />
       </div>
-      <div>
-        <label>Set in order</label>
-        <input type="text" v-model="set_in_order" />
-      </div>
-      <div>
-        <label>Standardize</label>
-        <input type="text" v-model="standardize" />
-      </div>
-      <div>
-        <label>Misc</label>
-        <input type="text" v-model="misc" />
-      </div>
-      <div>
-        <label>Hours Worked</label>
-        <input type="integer" v-model="worked" />
-      </div>
-      <div>
-        <label>Square foot printed</label>
-        <input type="integer" v-model="printed" />
-      </div>
-      <div>
-        <label>Square foot cut</label>
-        <input type="integer" v-model="cut" />
-      </div>
-      <input type="submit" value="Submit" />
     </form>
   </div>
 </template>
