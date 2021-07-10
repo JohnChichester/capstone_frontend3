@@ -9,6 +9,7 @@
       </div>
      
     </div>-->
+    <chart-container />
 
     <div class="row">
       <div class="card">
@@ -57,9 +58,15 @@
 </template>
 
 <script>
-/* global $, Chart */
+/* global $, */
 import axios from "axios";
+import { Chart } from "chart.js";
+import ChartContainer from "@/components/ChartContainer.vue";
+
 export default {
+  components: {
+    ChartContainer,
+  },
   data: function () {
     return {
       reports: [],

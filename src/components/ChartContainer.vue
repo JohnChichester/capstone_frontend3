@@ -5,6 +5,7 @@
 </template>
 
 <script>
+//import axios from "axios";
 import LineChart from "./Chart.vue";
 
 export default {
@@ -16,13 +17,20 @@ export default {
   }),
   async mounted() {
     this.loaded = false;
-    try {
-      const { userlist } = await fetch("/api/userlist");
-      this.chartdata = userlist;
-      this.loaded = true;
-    } catch (e) {
-      console.error(e);
-    }
+    this.chartdata = {
+      labels: ["January", "February"],
+      datasets: [
+        {
+          label: "Data One",
+          backgroundColor: "#f87979",
+          data: [40, 20],
+        },
+      ],
+    };
+    this.options = {
+      responsive: true,
+      maintainAspectRatio: false,
+    };
   },
 };
 </script>
