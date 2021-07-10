@@ -15,20 +15,31 @@
         <form v-on:submit.prevent="submit()">
           <div class="form-group">
             <label for="question.good_day_bad_day">How was your day?</label>
-            <select id="inputStatus" class="form-control custom-select">
+            <select id="inputStatus" class="form-control custom-select" v-model="good_day_bad_day">
               <option selected disabled>Select one</option>
-              <option for="1">Great</option>
-              <option for="0">Fine</option>
-              <option for="-1">Not So Good</option>
+              <option value="1">Great</option>
+              <option value="0">Fine</option>
+              <option value="-1">Not So Good</option>
             </select>
           </div>
 
-          <!-- -->
+          <div class="form-group">
+            <label for="safety">Are there any safety concerns?</label>
+            <textarea class="form-control" rows="4" type="text" v-model="safety"></textarea>
+          </div>
+          <!-- 
           <div class="form-group" v-for="question in questions" v-bind:key="question.id">
             <label for="question.catagory">{{ question.question_text }}</label>
             <textarea class="form-control" rows="4" type="text" v-model="question.catagory"></textarea>
           </div>
-          <!-- -->
+           -->
+          <!-- 
+          <div class="form-group" v-for="question in questions" v-bind:key="question.id">
+            <label for="question.catagory">{{ question.question_text }}</label>
+            <textarea class="form-control" rows="4" type="text" v-model="question.catagory"></textarea>
+          </div>
+           -->
+
           <div class="form-group">
             <label for="misc">Misc tracking was due to..</label>
             <input type="text" id="misc" class="form-control" v-model="misc" />
@@ -95,7 +106,7 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      good_day_bad_day: "",
+      good_day_bad_day: 0,
       safety: "",
       sustain: "",
       shine: "",
@@ -104,8 +115,8 @@ export default {
       standardize: "",
       misc: "",
       worked: 8,
-      printed: "",
-      cut: "",
+      printed: 0,
+      cut: 0,
       errors: [],
       version: 1,
       questions: [],
