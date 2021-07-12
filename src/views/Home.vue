@@ -1,114 +1,25 @@
 <template>
   <div class="Home">
+    <!-- AREA CHART 
     <div class="card card-primary">
-      <div class="card-header">
-        <h3 class="card-title">Area Chart</h3>
-
-        <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-tool" data-card-widget="remove">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-      </div>
       <div class="card-body">
-        <div>
-          <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+        <div class="chart">
+          <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%"></canvas>
         </div>
       </div>
-      <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
+     
+    </div>-->
+    <chart-container />
 
-    <div class="card-body">
-      <ul class="pagination pagination-month justify-content-center">
-        <li class="page-item"><a class="page-link" href="#">«</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">
-            <p class="page-month">Jan</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item active">
-          <a class="page-link" href="#">
-            <p class="page-month">Feb</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">
-            <p class="page-month">Mar</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">
-            <p class="page-month">Apr</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">
-            <p class="page-month">May</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">
-            <p class="page-month">Jun</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">
-            <p class="page-month">Jul</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">
-            <p class="page-month">Aug</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">
-            <p class="page-month">Sep</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">
-            <p class="page-month">Oct</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">
-            <p class="page-month">Nov</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">
-            <p class="page-month">Dec</p>
-            <p class="page-year">2021</p>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">»</a></li>
-      </ul>
-    </div>
-
-    <div class="row justify-content-center">
+    <div class="row">
       <div class="card">
         <div class="card-header border-transparent">
           <h3 class="card-title">
-            <p v-if="isAdmin()">All Reports</p>
-            <p v-if="!isAdmin()">My Reports</p>
+            <p v-if="current_user.admin === true">All Reports</p>
+            <p v-if="current_user.admin === false">My Reports</p>
           </h3>
         </div>
+
         <!-- /.card-header -->
         <div class="card-body p-0">
           <div class="table-responsive">
@@ -142,87 +53,172 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-      <div class="card">
-        <div class="card-header border-transparent">
-          <h3 class="card-title">
-            <p>Production Totals</p>
-          </h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body p-0">
-          <div class="table-responsive">
-            <table class="table m-0">
-              <thead>
-                <tr>
-                  <th>Summary Totals</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>4300</td>
-                  <td>Sq Ft Printed</td>
-                </tr>
-                <tr>
-                  <td>3300</td>
-                  <td>Sq Ft Cut</td>
-                </tr>
-                <tr>
-                  <td>720</td>
-                  <td>Total Hours</td>
-                </tr>
-                <tr>
-                  <td>120</td>
-                  <td>Overtime</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <!-- /.table-responsive -->
-        </div>
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
     </div>
   </div>
 </template>
 
 <script>
+/* global $, */
 import axios from "axios";
-import VueApexCharts from "vue3-apexcharts";
+import { Chart } from "chart.js";
+import ChartContainer from "@/components/ChartContainer.vue";
 
 export default {
   components: {
-    apexchart: VueApexCharts,
+    ChartContainer,
   },
-
   data: function () {
     return {
       reports: [],
-      current_user: {},
+      current_user: "",
       status: null,
-      chartOptions: {
-        chart: {
-          id: "vuechart-example",
-        },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-        },
-      },
-      series: [
-        {
-          name: "series-1",
-          data: [30, 40, 35, 50, 49, 60, 70, 91],
-        },
-      ],
     };
   },
   created: function () {
     this.indexReports();
   },
+  mounted: function () {
+    $(function () {
+      /* ChartJS
+       * -------
+       * Here we will create a few charts using ChartJS
+       */
+
+      //--------------
+      //- AREA CHART -
+      //--------------
+
+      // Get context with jQuery - using jQuery's .get() method.
+      var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
+
+      var areaChartData = {
+        labels: ["February", "March", "April", "May", "June", "July"],
+        datasets: [
+          {
+            label: "Digital Goods",
+            backgroundColor: "rgba(60,141,188,0.9)",
+            borderColor: "rgba(60,141,188,0.8)",
+            pointRadius: false,
+            pointColor: "#3b8bba",
+            pointStrokeColor: "rgba(60,141,188,1)",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(60,141,188,1)",
+            data: [28, 48, 40, 19, 86, 27, 90],
+          },
+          {
+            label: "Electronics",
+            backgroundColor: "rgba(210, 214, 222, 1)",
+            borderColor: "rgba(210, 214, 222, 1)",
+            pointRadius: false,
+            pointColor: "rgba(210, 214, 222, 1)",
+            pointStrokeColor: "#c1c7d1",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [65, 59, 80, 81, 56, 55, 40],
+          },
+        ],
+      };
+
+      var areaChartOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        legend: {
+          display: false,
+        },
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
+        },
+      };
+
+      // This will get the first returned node in the jQuery collection.
+      new Chart(areaChartCanvas, {
+        type: "line",
+        data: areaChartData,
+        options: areaChartOptions,
+      });
+
+      //-------------
+      //- LINE CHART -
+      //--------------
+      // var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
+      var lineChartOptions = $.extend(true, {}, areaChartOptions);
+      var lineChartData = $.extend(true, {}, areaChartData);
+      lineChartData.datasets[0].fill = false;
+      lineChartData.datasets[1].fill = false;
+      lineChartOptions.datasetFill = false;
+
+      //var lineChart = new Chart(lineChartCanvas, {
+      // type: "line",
+      // data: lineChartData,
+      //  options: lineChartOptions,
+      // });
+
+      //-------------
+      //- BAR CHART -
+      //-------------
+      var barChartCanvas = $("#barChart").get(0).getContext("2d");
+      var barChartData = $.extend(true, {}, areaChartData);
+      var temp0 = areaChartData.datasets[0];
+      var temp1 = areaChartData.datasets[1];
+      barChartData.datasets[0] = temp1;
+      barChartData.datasets[1] = temp0;
+
+      var barChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        datasetFill: false,
+      };
+
+      new Chart(barChartCanvas, {
+        type: "bar",
+        data: barChartData,
+        options: barChartOptions,
+      });
+
+      //---------------------
+      //- STACKED BAR CHART -
+      //---------------------
+      var stackedBarChartCanvas = $("#stackedBarChart").get(0).getContext("2d");
+      var stackedBarChartData = $.extend(true, {}, barChartData);
+
+      var stackedBarChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          xAxes: [
+            {
+              stacked: true,
+            },
+          ],
+          yAxes: [
+            {
+              stacked: true,
+            },
+          ],
+        },
+      };
+
+      new Chart(stackedBarChartCanvas, {
+        type: "bar",
+        data: stackedBarChartData,
+        options: stackedBarChartOptions,
+      });
+    });
+  },
   methods: {
-    isAdmin: function () {
-      return localStorage.getItem("admin");
-    },
     indexReports: function () {
       axios.get("/reports").then((response) => {
         this.reports = response.data;

@@ -3,7 +3,7 @@
     <div class="content-header"></div>
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Extra Ess EOD</h3>
+        <h3 class="card-title">EOD</h3>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -26,31 +26,6 @@
           <div class="form-group">
             <label for="safety">Are there any safety concerns?</label>
             <textarea class="form-control" rows="4" type="text" v-model="safety"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="sustain">Did you leave your workspace in better condition than when you arrived?</label>
-            <textarea class="form-control" rows="4" type="text" v-model="sustain"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="shine">
-              Report of Quality Issues, Concerns for Review (All materials have nice clean edges and are neatly stacked
-              on pallets):
-            </label>
-            <textarea class="form-control" rows="4" type="text" v-model="shine"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="sort">Was your schedule completed and work tracked accurately?</label>
-            <textarea class="form-control" rows="4" type="text" v-model="sort"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="set_in_order">Was the needed material tagged properly for production?</label>
-            <textarea class="form-control" rows="4" type="text" v-model="set_in_order"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="standardize">
-              Did you receive job bags that were properly signed and contained all needed items for production?
-            </label>
-            <textarea class="form-control" rows="4" type="text" v-model="standardize"></textarea>
           </div>
           <!-- 
           <div class="form-group" v-for="question in questions" v-bind:key="question.id">
@@ -87,6 +62,41 @@
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
+
+    <form v-on:submit.prevent="submit()">
+      <div class="card card-default">
+        <h1></h1>
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+        </ul>
+        <div>
+          <label>How was your day?</label>
+          <input type="integer" v-model="good_day_bad_day" />
+        </div>
+        <div v-for="question in questions" v-bind:key="question.id">
+          <label>{{ question.question_text }}</label>
+          <input type="text" v-model="question.catagory" />
+        </div>
+
+        <div>
+          <label>Misc</label>
+          <input type="text" v-model="misc" />
+        </div>
+        <div>
+          <label>Hours Worked</label>
+          <input type="integer" v-model="worked" />
+        </div>
+        <div>
+          <label>Square foot printed</label>
+          <input type="integer" v-model="printed" />
+        </div>
+        <div>
+          <label>Square foot cut</label>
+          <input type="integer" v-model="cut" />
+        </div>
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
   </div>
 </template>
 

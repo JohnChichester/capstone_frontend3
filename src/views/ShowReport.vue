@@ -17,7 +17,6 @@
             </div>
             <div id="collapseOne" class="collapse show" data-parent="#accordion">
               <div class="card-body">
-                <h5>Are there any safety concerns?</h5>
                 {{ report.safety }}
               </div>
             </div>
@@ -30,7 +29,6 @@
             </div>
             <div id="collapseTwo" class="collapse" data-parent="#accordion">
               <div class="card-body">
-                <h5>Did you leave your workspace in better condition than when you arrived?</h5>
                 {{ report.sustain }}
               </div>
             </div>
@@ -43,10 +41,6 @@
             </div>
             <div id="collapseThree" class="collapse" data-parent="#accordion">
               <div class="card-body">
-                <h5>
-                  Report of Quality Issues, Concerns for Review (All materials have nice clean edges and are neatly
-                  stacked on pallets):
-                </h5>
                 {{ report.shine }}
               </div>
             </div>
@@ -59,7 +53,6 @@
             </div>
             <div id="collapseFour" class="collapse" data-parent="#accordion">
               <div class="card-body">
-                <h5>Was your schedule completed and work tracked accurately?</h5>
                 {{ report.sort }}
               </div>
             </div>
@@ -72,7 +65,6 @@
             </div>
             <div id="collapseFive" class="collapse" data-parent="#accordion">
               <div class="card-body">
-                <h5>Was the needed material tagged properly for production?</h5>
                 {{ report.set_in_order }}
               </div>
             </div>
@@ -85,9 +77,6 @@
             </div>
             <div id="collapseSix" class="collapse" data-parent="#accordion">
               <div class="card-body">
-                <h5>
-                  Did you receive job bags that were properly signed and contained all needed items for production?
-                </h5>
                 {{ report.standardize }}
               </div>
             </div>

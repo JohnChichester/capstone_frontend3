@@ -54,20 +54,6 @@
                 <p>Logout</p>
               </a>
             </li>
-            <li class="nav-item menu-open">
-              <a href="#" class="nav-link active">
-                <i class="fa-calculator"></i>
-                <p>
-                  Calculator
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <div>
-                  <calculator />
-                </div>
-              </ul>
-            </li>
           </ul>
         </nav>
       </aside>
@@ -116,24 +102,10 @@
 <style></style>
 
 <script>
-import Calculator from "@/components/Calculator.vue";
-
 export default {
-  components: {
-    Calculator,
-  },
-  data: function () {
-    return {
-      admin: false,
-      currentUser: {},
-    };
-  },
   methods: {
     isLoggedIn: function () {
       return localStorage.getItem("jwt");
-    },
-    isAdmin: function () {
-      return localStorage.getItem("admin");
     },
   },
 };
