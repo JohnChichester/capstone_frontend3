@@ -2,7 +2,7 @@
   <div class="Home">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Area Chart</h3>
+        <h3 class="card-title">Workplace Moral</h3>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -15,7 +15,7 @@
       </div>
       <div class="card-body">
         <div>
-          <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+          <apexchart height="310" type="area" :options="chartOptions" :series="series"></apexchart>
         </div>
       </div>
       <!-- /.card-body -->
@@ -188,7 +188,7 @@
 
 <script>
 import axios from "axios";
-import VueApexCharts from "vue3-apexcharts";
+import VueApexCharts from "vue-apexcharts";
 
 export default {
   components: {
@@ -202,26 +202,42 @@ export default {
       status: null,
       chartOptions: {
         chart: {
-          id: "vuechart-example",
+          id: "Workplace Morale",
         },
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+          categories: [],
         },
       },
       series: [
         {
-          name: "series-1",
-          data: [30, 40, 35, 50, 49, 60, 70, 91],
+          name: "average",
+          data: [],
         },
       ],
     };
   },
+  //mounted: function () {
+  // axios.get("/reports").then((response) => {
+  // (reports = response.data),
+  // (dateList = []),
+  // (gdbd = []),
+  // reports.each(function (report) {
+  //   datelist.push(report.date);
+  //  })((chartOptions.xaxis.catagories = [...new Set(datelist)]));
+  //  });
+
+  //TODO: pull Data(dates and GDBD's)
+  //TODO: get de-duped dates list/array from data
+  //TODO: get and average GDBD per each date
+  //TODO: set dates to chartOprions.xaxis.catagories
+  //TODO: set averages to chartOptions.series.data
+  // },
   created: function () {
     this.indexReports();
   },
   methods: {
     isAdmin: function () {
-      return localStorage.getItem("admin");
+      return localStorage.getItem("admin").toLowerCase() == "true";
     },
     indexReports: function () {
       axios.get("/reports").then((response) => {
