@@ -2,7 +2,7 @@
   <div class="Home">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Workplace Moral</h3>
+        <h3 class="card-title">Workplace MoralE</h3>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -31,7 +31,7 @@
             <p class="page-year">2021</p>
           </a>
         </li>
-        <li class="page-item active">
+        <li class="page-item">
           <a class="page-link" href="#">
             <p class="page-month">Feb</p>
             <p class="page-year">2021</p>
@@ -61,7 +61,7 @@
             <p class="page-year">2021</p>
           </a>
         </li>
-        <li class="page-item">
+        <li class="page-item active">
           <a class="page-link" href="#">
             <p class="page-month">Jul</p>
             <p class="page-year">2021</p>
@@ -118,7 +118,6 @@
                   <th>=)</th>
                   <th>Date</th>
                   <th>Hours</th>
-                  <th>Tagged Jobs</th>
                 </tr>
               </thead>
               <tbody>
@@ -128,7 +127,15 @@
                     <router-link v-bind:to="`/reports/${report.id}`">{{ report.Date }}</router-link>
                   </td>
                   <td>
-                    <span class="badge badge-success">{{ report.worked }}</span>
+                    <span
+                      class="badge badge-success"
+                      :class="
+                        report.worked < 8 ? 'badge-warning' : report.worked > 8 ? 'badge-danger' : 'badge-success'
+                      "
+                      v-bind:key="report.worked"
+                    >
+                      {{ report.worked }}
+                    </span>
                   </td>
                   <td>
                     <div class="sparkbar" data-color="#00a65a" data-height="20">{{ report.tagged_jobs }}</div>
@@ -198,51 +205,79 @@ export default {
   data: function () {
     return {
       reports: [],
-      current_user: {},
       status: null,
+      dateList: [],
+      gdbd: [],
+      totalPrinted: [],
+      totalCut: [],
       chartOptions: {
         chart: {
           id: "Workplace Morale",
         },
         xaxis: {
-          categories: [],
+          type: "datetime",
+          categories: [], //["7.1.2021", "7.2.2021", "7.3.2021", "7.4.2021", "7.5.2021", "7.6.2021"],
         },
       },
       series: [
         {
-          name: "average",
-          data: [],
+          name: "series-1",
+          data: [], //[30, 40, 35, 50, 49, 60, 70, 500],
+        },
+      ],
+      series2: [
+        {
+          name: "series-2",
+          data: [], //[30, 40, 35, 50, 49, 60, 70, 500],
         },
       ],
     };
   },
-  //mounted: function () {
-  // axios.get("/reports").then((response) => {
-  // (reports = response.data),
-  // (dateList = []),
-  // (gdbd = []),
-  // reports.each(function (report) {
-  //   datelist.push(report.date);
-  //  })((chartOptions.xaxis.catagories = [...new Set(datelist)]));
-  //  });
-
-  //TODO: pull Data(dates and GDBD's)
-  //TODO: get de-duped dates list/array from data
-  //TODO: get and average GDBD per each date
-  //TODO: set dates to chartOprions.xaxis.catagories
-  //TODO: set averages to chartOptions.series.data
-  // },
+  mounted: function () {
+    //TODO: pull Data(dates and GDBD's)
+    //TODO: get de-duped dates list/array from data
+    //TODO: get and average GDBD per each date
+    //TODO: set dates to chartOprions.xaxis.catagories
+    //TODO: set averages to chartOptions.series.data
+  },
   created: function () {
     this.indexReports();
   },
   methods: {
+    pullInfo: function () {
+      let dataset = [];
+      this.reports.forEach((report) => {
+        if (
+          this.chartOptions.xaxis.categories.length > 0 &&
+          this.chartOptions.xaxis.categories[this.chartOptions.xaxis.categories.length - 1] === report.Date
+        ) {
+          console.log("dies this ever happen:");
+          dataset[dataset.length - 1] += report.printed;
+        } else {
+          this.chartOptions.xaxis.categories.push(report.Date);
+          dataset.push(report.printed);
+        }
+      });
+      this.series[0].data = dataset;
+    },
+
     isAdmin: function () {
       return localStorage.getItem("admin").toLowerCase() == "true";
     },
     indexReports: function () {
       axios.get("/reports").then((response) => {
-        this.reports = response.data;
+        this.reports = response.data.sort((a, b) => {
+          if (a.Date < b.Date) {
+            return -1;
+          }
+          if (a.Date > b.Date) {
+            return 1;
+          }
+          return 0;
+        });
+
         console.log(this.reports);
+        this.pullInfo();
       });
     },
     showReport: function () {
