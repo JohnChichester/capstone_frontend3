@@ -128,7 +128,7 @@ export default {
         set_in_order: this.set_in_order,
         standardize: this.standardize,
         misc: this.misc,
-        worked: 8,
+        worked: this.worked,
         printed: this.printed,
         cut: this.cut,
         version: this.version,

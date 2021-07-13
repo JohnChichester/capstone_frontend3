@@ -243,23 +243,23 @@ export default {
   },
   methods: {
     pullInfo: function () {
-      let dataset = [];
-      let dataset2 = [];
+      let printAmounts = [];
+      let cutAmounts = [];
       this.reports.forEach((report) => {
         if (
           this.chartOptions.xaxis.categories.length > 0 &&
           this.chartOptions.xaxis.categories[this.chartOptions.xaxis.categories.length - 1] === report.Date
         ) {
-          dataset[dataset.length - 1] += report.printed;
-          dataset2[dataset2.length - 1] += report.cut;
+          printAmounts[printAmounts.length - 1] += report.printed;
+          cutAmounts[cutAmounts.length - 1] += report.cut;
         } else {
           this.chartOptions.xaxis.categories.push(report.Date);
-          dataset.push(report.printed);
-          dataset2.push(report.cut);
+          printAmounts.push(report.printed);
+          cutAmounts.push(report.cut);
         }
       });
-      this.series[0].data = dataset;
-      this.series[1].data = dataset2;
+      this.series[0].data = printAmounts;
+      this.series[1].data = cutAmounts;
     },
 
     isAdmin: function () {
