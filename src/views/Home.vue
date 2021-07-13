@@ -2,7 +2,7 @@
   <div class="Home">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Workplace MoralE</h3>
+        <h3 class="card-title">Print & Cut Output</h3>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -166,11 +166,11 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>4300</td>
+                  <td>{{ totalPrint }}</td>
                   <td>Sq Ft Printed</td>
                 </tr>
                 <tr>
-                  <td>3300</td>
+                  <td>{{ totalCut }}</td>
                   <td>Sq Ft Cut</td>
                 </tr>
                 <tr>
@@ -206,38 +206,33 @@ export default {
     return {
       reports: [],
       status: null,
-      dateList: [],
-      gdbd: [],
-      totalPrinted: [],
-      totalCut: [],
+      totalPrint: 0,
+      totalCut: 0,
       chartOptions: {
         chart: {
-          id: "Workplace Morale",
+          id: "Production Totals",
         },
         xaxis: {
           type: "datetime",
-          categories: [], //["7.1.2021", "7.2.2021", "7.3.2021", "7.4.2021", "7.5.2021", "7.6.2021"],
+          categories: [],
         },
       },
       series: [
         {
           name: "printed",
-          data: [], //[30, 40, 35, 50, 49, 60, 70, 500],
+          data: [],
         },
         {
           name: "cut",
-          data: [], //[30, 40, 35, 50, 49, 60, 70, 500],
+          data: [],
         },
       ],
     };
   },
-  mounted: function () {
-    //TODO: pull Data(dates and GDBD's)
-    //TODO: get de-duped dates list/array from data
-    //TODO: get and average GDBD per each date
-    //TODO: set dates to chartOprions.xaxis.catagories
-    //TODO: set averages to chartOptions.series.data
-  },
+  //TODO: get and average GDBD per each date
+
+  //TODO: set averages to chartOptions.series.data
+
   created: function () {
     this.indexReports();
   },
@@ -260,6 +255,13 @@ export default {
       });
       this.series[0].data = printAmounts;
       this.series[1].data = cutAmounts;
+      cutAmounts.forEach((cutDay) => {
+        this.totalCut += cutDay;
+      });
+      printAmounts.forEach((printDay) => {
+        this.totalPrint += printDay;
+      });
+      console.log(this.totalPrint);
     },
 
     isAdmin: function () {
