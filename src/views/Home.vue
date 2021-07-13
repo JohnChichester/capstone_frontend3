@@ -122,9 +122,19 @@
               </thead>
               <tbody>
                 <tr v-for="report in reports" v-bind:key="report.id">
-                  <td>{{ report.good_day_bad_day }}</td>
                   <td>
-                    <router-link v-bind:to="`/reports/${report.id}`">{{ report.Date }}</router-link>
+                    <p v-if="report.good_day_bad_day === 1">😀</p>
+                    <p v-if="report.good_day_bad_day === -1">︁😡</p>
+                    <p v-if="report.good_day_bad_day === 0">︁😐︁</p>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-block btn-outline-secondary btn-xs"
+                      v-bind:to="`/reports/${report.id}`"
+                    >
+                      <router-link v-bind:to="`/reports/${report.id}`">{{ report.Date }}</router-link>
+                    </button>
                   </td>
                   <td>
                     <span
@@ -174,11 +184,11 @@
                   <td>Sq Ft Cut</td>
                 </tr>
                 <tr>
-                  <td>720</td>
+                  <td>{{ hours }}</td>
                   <td>Total Hours</td>
                 </tr>
                 <tr>
-                  <td>120</td>
+                  <td>{{ overtime }}</td>
                   <td>Overtime</td>
                 </tr>
               </tbody>
@@ -208,6 +218,8 @@ export default {
       status: null,
       totalPrint: 0,
       totalCut: 0,
+      hours: 0,
+      overtime: 0,
       chartOptions: {
         chart: {
           id: "Production Totals",
@@ -252,7 +264,12 @@ export default {
           printAmounts.push(report.printed);
           cutAmounts.push(report.cut);
         }
+        this.hours += report.worked;
+        if (report.worked > 8) {
+          this.overtime += report.worked - 8;
+        }
       });
+      console.log("hours", this.hours);
       this.series[0].data = printAmounts;
       this.series[1].data = cutAmounts;
       cutAmounts.forEach((cutDay) => {
@@ -261,7 +278,6 @@ export default {
       printAmounts.forEach((printDay) => {
         this.totalPrint += printDay;
       });
-      console.log(this.totalPrint);
     },
 
     isAdmin: function () {
@@ -279,7 +295,6 @@ export default {
           return 0;
         });
 
-        console.log(this.reports);
         this.pullInfo();
       });
     },

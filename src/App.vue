@@ -54,7 +54,7 @@
                 <p>Logout</p>
               </a>
             </li>
-            <li class="nav-item menu-open">
+            <!--<li class="nav-item menu-open">
               <a href="#" class="nav-link active">
                 <i class="fa-calculator"></i>
                 <p>
@@ -67,7 +67,7 @@
                   <calculator />
                 </div>
               </ul>
-            </li>
+            </li>-->
           </ul>
         </nav>
       </aside>
@@ -116,11 +116,11 @@
 <style></style>
 
 <script>
-import Calculator from "@/components/Calculator.vue";
+//import Calculator from "@/components/Calculator.vue";
 
 export default {
   components: {
-    Calculator,
+    // Calculator,
   },
   data: function () {
     return {
