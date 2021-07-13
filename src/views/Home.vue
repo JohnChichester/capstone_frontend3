@@ -221,13 +221,11 @@ export default {
       },
       series: [
         {
-          name: "series-1",
+          name: "printed",
           data: [], //[30, 40, 35, 50, 49, 60, 70, 500],
         },
-      ],
-      series2: [
         {
-          name: "series-2",
+          name: "cut",
           data: [], //[30, 40, 35, 50, 49, 60, 70, 500],
         },
       ],
@@ -246,19 +244,22 @@ export default {
   methods: {
     pullInfo: function () {
       let dataset = [];
+      let dataset2 = [];
       this.reports.forEach((report) => {
         if (
           this.chartOptions.xaxis.categories.length > 0 &&
           this.chartOptions.xaxis.categories[this.chartOptions.xaxis.categories.length - 1] === report.Date
         ) {
-          console.log("dies this ever happen:");
           dataset[dataset.length - 1] += report.printed;
+          dataset2[dataset2.length - 1] += report.cut;
         } else {
           this.chartOptions.xaxis.categories.push(report.Date);
           dataset.push(report.printed);
+          dataset2.push(report.cut);
         }
       });
       this.series[0].data = dataset;
+      this.series[1].data = dataset2;
     },
 
     isAdmin: function () {
