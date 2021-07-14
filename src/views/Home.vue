@@ -25,6 +25,16 @@
           <h3 class="card-title">
             <p v-if="isAdmin()">All Reports</p>
             <p v-if="!isAdmin()">My Reports</p>
+            <!-- <div>
+              Specify Date
+              <input type="text" v-model="searchFilter" list="report-dates" />
+              <datalist id="report-dates">
+                <select id="inputStatus" class="form-control custom-select" v-model="searchFilter">
+                  <option selected disabled>View Specific Date</option>
+                  <option v-for="report in reports" v-bind:key="report.date">{{ report.date }}</option>
+                </select>
+              </datalist>
+            </div> -->
           </h3>
         </div>
         <!-- /.card-header -->
@@ -138,8 +148,6 @@ export default {
       totalCut: 0,
       hours: 0,
       overtime: 0,
-      pageStart: 1,
-      pagedReports: [],
       chartOptions: {
         chart: {
           id: "Production Totals",
