@@ -1,20 +1,33 @@
 <template>
   <div class="Login">
-    <form v-on:submit.prevent="submit()">
-      <h1>Login</h1>
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Login</h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
       <ul>
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
-      <div>
-        <label>Username:</label>
-        <input type="username" v-model="username" />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" v-model="password" />
-      </div>
-      <input type="submit" value="Submit" />
-    </form>
+      <form v-on:submit.prevent="submit()">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="username" v-model="username" class="form-control" placeholder="Enter Username" />
+          </div>
+          <div class="form-group">
+            <label for="password1">Password</label>
+            <input type="password" v-model="password" class="form-control" placeholder="Password" />
+          </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.card -->
   </div>
 </template>
 

@@ -1,32 +1,55 @@
 <template>
   <div class="Signup">
-    <form v-on:submit.prevent="submit()">
-      <h1>Signup</h1>
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-      </ul>
-      <div>
-        <label>First Name:</label>
-        <input type="text" v-model="first_name" />
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Create User</h3>
       </div>
-      <div>
-        <label>Last Name:</label>
-        <input type="text" v-model="last_name" />
-      </div>
-      <div>
-        <label>Department:</label>
-        <input type="text" v-model="department" />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" v-model="password" />
-      </div>
-      <div>
-        <label>Password Confirmation:</label>
-        <input type="password" v-model="passwordConfirmation" />
-      </div>
-      <input type="submit" value="Submit" />
-    </form>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <form v-on:submit.prevent="submit()">
+        <div class="card-body">
+          <div></div>
+          <div class="form-group">
+            <label for="first_name">First Name:</label>
+            <input type="first_name" class="form-control" v-model="first_name" placeholder="Enter name" />
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name:</label>
+            <input type="last_name" class="form-control" v-model="last_name" placeholder="Enter name" />
+          </div>
+          <div class="form-group">
+            <label for="department">Department:</label>
+            <select class="form-control" v-model="department">
+              <option>Production</option>
+              <option>Pre-press</option>
+              <option>Marketing</option>
+              <option>Sales</option>
+              <option>Management</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="last_name">Password:</label>
+            <input
+              type="password"
+              class="form-control"
+              v-model="password"
+              placeholder="Passwords must contain 3 prime numbers and the symbol of a forgotten god"
+            />
+          </div>
+          <div class="form-group">
+            <label for="last_name">Password confirmation</label>
+            <input type="password" class="form-control" v-model="passwordConfirmation" />
+          </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+        </div>
+      </form>
+    </div>
+    <!-- /.card -->
   </div>
 </template>
 
